@@ -25,10 +25,10 @@ let tail_fold_left f init l =
     | h::t -> iter (f) (t) (f (acc) (h))
   in iter f l init
 
-let tail_fold_right f init l = 
+let tail_fold_right f l init = 
   let rec iter f l acc = match l with 
     [] -> acc
-    | h::t -> iter (f) (t) (f (acc) (h))
+    | h::t -> iter (f) (t) (f (h) (acc))
   in iter f (List.rev l) init
 
 
@@ -42,7 +42,7 @@ let tail_append list1 list2 =
   let rec iter list1 list2 acc = match (list1,list2) with 
     ([],[]) -> acc
     | (h::t,_) -> iter (t) (list2) (h::acc)
-    | ([],h::t) -> iter ([]) t (h::acc)
+    | ([],h::t) -> iter ([]) (t) (h::acc)
   in let rev_list = iter list1 list2 []
   in List.rev rev_list
 
@@ -60,5 +60,5 @@ let _ = tail_map (fun z -> print_string((string_of_int z) ^ " ")) (tail_rev l1)
 let _ = print_endline ""
 let _ = print_int (tail_fold_left ( * ) 1 l1)
 let _ = print_endline ""
-let _ = print_int (tail_fold_right ( + ) 0 l1)
+let _ = print_int (tail_fold_right ( + ) l1 0)
 let _ = print_endline ""
