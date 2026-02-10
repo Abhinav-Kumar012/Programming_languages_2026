@@ -46,19 +46,19 @@ let tail_append list1 list2 =
   in let rev_list = iter list1 list2 []
   in List.rev rev_list
 
-let l1 = [1;2;3;4;5]
-let l2 = [6;7;8;9;10]
+let l1 = [1;2;3;4;5];;
+let l2 = [6;7;8;9;10];;
 
 
-let _ = tail_map (fun z -> print_string((string_of_int z) ^ " ")) (tail_map (fun x -> x*x) l1)
-let _ = print_endline ""
-let _ = tail_map (fun z -> print_string((string_of_int z) ^ " ")) (tail_append l1 l2)
-let _ = print_endline ""
-let _ = tail_map (fun z -> print_string((string_of_int z) ^ " ")) (tail_filter (fun x -> x mod 2 = 0) l1)
-let _ = print_endline ""
-let _ = tail_map (fun z -> print_string((string_of_int z) ^ " ")) (tail_rev l1)
-let _ = print_endline ""
-let _ = print_int (tail_fold_left ( * ) 1 l1)
-let _ = print_endline ""
-let _ = print_int (tail_fold_right ( + ) l1 0)
-let _ = print_endline ""
+tail_map (fun z -> print_string((string_of_int z) ^ " ")) (tail_map (fun x -> x*x) l1);;
+print_endline "";;
+tail_map (fun z -> print_string((string_of_int z) ^ " ")) (tail_append l1 l2);;
+print_endline "";;
+tail_map (fun z -> print_string((string_of_int z) ^ " ")) (tail_filter (fun x -> x mod 2 = 0) l1);;
+print_endline "";;
+tail_map (fun z -> print_string((string_of_int z) ^ " ")) (tail_rev l1);;
+print_endline "";;
+print_int (tail_fold_left ( * ) 1 l1);;
+print_endline "";;
+print_int (tail_fold_right ( + ) l1 0);;
+print_endline "";;
