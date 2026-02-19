@@ -19,11 +19,9 @@ module Stack : STACK = struct
 end
 
 let main () =
-  let st =
-     Stack.empty in
-  let st1 = Stack.push 4 st in
-  print_endline (string_of_int (Stack.top st1));
-  let st2 = Stack.pop st1 in
+  let st = Stack.empty |> Stack.push 1 |> Stack.push 2 |> Stack.push 3 in
+  print_endline (string_of_int (Stack.top st));
+  let st2 = Stack.pop st in
   print_endline (string_of_bool (Stack.is_empty st2))
 
 let _ = main ()
