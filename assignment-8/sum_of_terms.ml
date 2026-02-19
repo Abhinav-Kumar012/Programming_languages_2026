@@ -29,7 +29,8 @@ let main () =
   and res4 = sumchars ~a:'a' ~b:'z' in
   print_endline ({|sumnum ~a:1 ~b:10 = |} ^ string_of_int res);
   print_endline ({|sumcube ~a:1 ~b:10 = |} ^ string_of_int res2);
-  print_endline ({|8. *. (sumpi ~a:1. ~b:50000.) = |} ^ string_of_float (res3 *. 8.));
+  print_endline
+    ({|8. *. (sumpi ~a:1. ~b:50000.) = |} ^ string_of_float (res3 *. 8.));
   prerr_endline ({|sumchars ~a:'a' ~b:'z' = |} ^ res4)
 
 let _ = main ()
