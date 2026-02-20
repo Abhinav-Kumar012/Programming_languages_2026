@@ -11,8 +11,8 @@ let sumcube =
 
 let sumpi =
   sum ~zero:0.
-    ~term:(fun x -> 1. /. (x *. (x +. 2.)))
-    ~next:(fun x -> x +. 4.)
+    ~term:(fun x -> 1. /. (((4. *. x) +. 1.) *. ((4. *. x) +. 3.)))
+    ~next:(fun x -> x +. 1.)
     ~plus:( +. )
 
 let sumchars ~a ~b =
@@ -25,12 +25,12 @@ let sumchars ~a ~b =
 let main () =
   let res = sumnum ~a:1 ~b:10
   and res2 = sumcube ~a:1 ~b:10
-  and res3 = sumpi ~a:1. ~b:50000.
+  and res3 = sumpi ~a:0. ~b:50000.
   and res4 = sumchars ~a:'a' ~b:'z' in
   print_endline ({|sumnum ~a:1 ~b:10 = |} ^ string_of_int res);
   print_endline ({|sumcube ~a:1 ~b:10 = |} ^ string_of_int res2);
   print_endline
-    ({|8. *. (sumpi ~a:1. ~b:50000.) = |} ^ string_of_float (res3 *. 8.));
+    ({|8. *. (sumpi ~a:0. ~b:50000.) = |} ^ string_of_float (res3 *. 8.));
   print_endline ({|sumchars ~a:'a' ~b:'z' = |} ^ res4)
 
 let _ = main ()
