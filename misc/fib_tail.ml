@@ -6,9 +6,7 @@ let fib_tail n =
     aux 1 1 (n - 2)
 
 let main () =
-  begin
-    print_int (fib_tail 8);
-    print_newline ()
-  end
+  print_int (fib_tail 8);
+  print_newline ()
 
 let _ = main ()
