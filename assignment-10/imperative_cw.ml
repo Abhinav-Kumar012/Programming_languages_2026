@@ -1,7 +1,4 @@
-(* let copy_arr arr copy_arr = if Array.length arr  = Array.length copy_arr then failwith "length mismatch" else let len = Array.length arr in let rec iter arr i = if i < 0 then copy_arr else copy_arr.(i) <- arr.(i); 
-iter arr (i-1) *)
-
-let copy_array arr1 arr2 =
+let copy_array_imp arr1 arr2 =
   if Array.length arr1 != Array.length arr2 then failwith "length mismatch"
   else
     let len = Array.length arr1 in
@@ -10,9 +7,20 @@ let copy_array arr1 arr2 =
     done;
     arr2
 
+let copy_array_rec arr1 arr2 =
+  if Array.length arr1 != Array.length arr2 then failwith "length mismatch"
+  else
+    let rec iter i =
+      if i < 0 then arr2
+      else
+        let () = arr2.(i) <- arr1.(i) in
+        iter (i - 1)
+    in
+    iter (Array.length arr1 - 1)
+
 let main () =
   let a1 = [| 1; 2; 3 |] and a2 = [| 2; 3; 4 |] in
-  let a3 = copy_array a1 a2 in
+  let a3 = copy_array_imp a1 a2 in
   print_endline
     (String.concat " " (List.map (fun x -> string_of_int x) (Array.to_list a3)))
 
