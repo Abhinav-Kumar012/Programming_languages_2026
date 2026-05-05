@@ -1,0 +1,152 @@
+# Calendar.is_leap_year 2026
+;;
+Error: Unbound value Calendar.is_leap_year
+
+# #use "m.ml";;
+module type CALENDAR =
+  sig
+    type month =
+        JAN
+      | FEB
+      | MAR
+      | APR
+      | MAY
+      | JUN
+      | JUL
+      | AUG
+      | SEP
+      | OCT
+      | NOV
+      | DEC
+    type date
+    val make_date : int -> month -> int -> date
+    val next_date : date -> date
+  end
+module Calendar : CALENDAR
+File "m.ml", line 52, characters 30-42:
+Error: Unbound record field Calendar.day
+
+# #use "m.ml";;
+module type CALENDAR =
+  sig
+    type month =
+        JAN
+      | FEB
+      | MAR
+      | APR
+      | MAY
+      | JUN
+      | JUL
+      | AUG
+      | SEP
+      | OCT
+      | NOV
+      | DEC
+    type date
+    val make_date : int -> month -> int -> date
+    val next_date : date -> date
+  end
+module Calendar : CALENDAR
+
+# next_date (make_date 19 Calendar.FEB 2026);;
+Error: Unbound value next_date
+
+# Calendar.next_date (make_date 19 Calendar.FEB 2026);;
+Error: Unbound value make_date
+
+# Calendar.next_date (Calendar.make_date 19 Calendar.FEB 2026);;
+- : Calendar.date = <abstr>
+
+# let empty = [];;
+val empty : 'a list = []
+
+# let x = 10 and y = 20 in x + y;;
+- : int = 30
+
+# #use "pair.ml";;
+module type COMP =
+  sig
+    type t
+    val ( < ) : t -> t -> bool
+    val ( > ) : t -> t -> bool
+    val ( = ) : t -> t -> bool
+    val string_of_t : t -> string
+  end
+module IntComp :
+  sig
+    type t = int
+    val ( < ) : t -> t -> bool
+    val ( > ) : t -> t -> bool
+    val ( = ) : t -> t -> bool
+    val string_of_t : t -> string
+  end
+module type PAIR =
+  sig
+    type elt
+    type t
+    val newpair : elt -> elt -> t
+    val first : 'a * 'b -> 'a
+    val second : 'a * 'b -> 'b
+    val ascending : elt * elt -> elt * elt
+    val descending : elt * elt -> elt * elt
+    val string_of_pair : t -> string
+  end
+module Pair :
+  functor (C : COMP) ->
+    sig
+      type elt = C.t
+      type t = elt * elt
+      val newpair : elt -> elt -> t
+      val first : 'a * 'b -> 'a
+      val second : 'a * 'b -> 'b
+      val ascending : elt * elt -> elt * elt
+      val descending : elt * elt -> elt * elt
+      val string_of_pair : t -> string
+    end
+module IntPair :
+  sig
+    type elt = int
+    type t = elt * elt
+    val newpair : elt -> elt -> t
+    val first : 'a * 'b -> 'a
+    val second : 'a * 'b -> 'b
+    val ascending : elt * elt -> elt * elt
+    val descending : elt * elt -> elt * elt
+    val string_of_pair : t -> string
+  end
+val tint : unit -> unit = <fun>
+type date = { day : int; month : int; year : int; }
+module DateComp :
+  sig
+    type t = date
+    val ( < ) : t -> t -> bool
+    val ( > ) : t -> t -> bool
+    val ( = ) : t -> t -> bool
+    val string_of_t : t -> string
+  end
+module DatePair :
+  sig
+    type elt = date
+    type t = elt * elt
+    val newpair : elt -> elt -> t
+    val first : 'a * 'b -> 'a
+    val second : 'a * 'b -> 'b
+    val ascending : elt * elt -> elt * elt
+    val descending : elt * elt -> elt * elt
+    val string_of_pair : t -> string
+  end
+val tdate : unit -> unit = <fun>
+
+# tint ();;
+(1, 2)
+first = 1
+Ascending = (1, 2)
+Descending = (2, 1)
+- : unit = ()
+
+# tdate ();;
+(Date (21, 3, 2022), Date (1, 4, 2022))
+first = Date (21, 3, 2022)
+Ascending = (Date (21, 3, 2022), Date (1, 4, 2022))
+Descending = (Date (1, 4, 2022), Date (21, 3, 2022))
+- : unit = ()

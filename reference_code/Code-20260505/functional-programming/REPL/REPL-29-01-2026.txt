@@ -1,0 +1,80 @@
+utop # 1;;
+- : int = 1
+utop # 1.0;;
+- : float = 1.
+utop # true;;
+- : bool = true
+utop # "IIITB";;
+- : string = "IIITB"
+utop # [1; 2; 3];;
+- : int list = [1; 2; 3]
+utop # List.length [1;2;3];;
+- : int = 3
+utop # let l = [1; 2; 3];;
+val l : int list = [1; 2; 3]
+utop # List.nth 2 l;;
+Error: This expression has type int but an expression was expected of type
+         'a list
+utop # List.nth l 2;;
+- : int = 3
+utop # List.hd l;;
+- : int = 1
+utop # List.tl l;;
+- : int list = [2; 3]
+utop # let t = (1, 2);;
+val t : int * int = (1, 2)
+utop # let t = (1, 2.0);;
+val t : int * float = (1, 2.)
+utop # [1; 2.];;
+Error: This expression has type float but an expression was expected of type
+         int
+utop # (1, "January", 2026);;
+- : int * string * int = (1, "January", 2026)
+utop # let lol = [[1; 2]; [3; 4; 5]];;
+val lol : int list list = [[1; 2]; [3; 4; 5]]
+utop # if l = [1;2;3] then true else false;;
+- : bool = true
+utop # if 1 = 2 then "impossible" else if 2 = 2 then "possible" else "impossible";;
+- : string = "possible"
+utop # let x = if 1 = 2 then "impossible" else if 2 = 2 then "possible" else "impossible";;
+val x : string = "possible"
+utop # if l = [1;2;3] then true else "false";;
+Error: This expression has type string but an expression was expected of type
+         bool
+utop # let dbl x = 2 * x;;
+val dbl : int -> int = <fun>
+utop # dbl 2;;
+- : int = 4
+utop # dbl 2.;;
+Error: This expression has type float but an expression was expected of type
+         int
+utop # let dbl x = float_of_int (2 * x);;
+val dbl : int -> float = <fun>
+utop # let id x = x;;
+val id : 'a -> 'a = <fun>
+utop # id 1;;
+- : int = 1
+utop # id "Sujit";;
+- : string = "Sujit"
+utop # 1 / 2;;
+- : int = 0
+utop # let add x y = x + y;;
+val add : int -> int -> int = <fun>
+utop # string_of_int 1;;
+- : string = "1"
+utop # "Sujit" ^ " " ^ "Chakrabarti";;
+- : string = "Sujit Chakrabarti"
+utop # add 2;;
+- : int -> int = <fun>
+utop # let add2 = add 2;;
+val add2 : int -> int = <fun>
+utop # add2 4;;
+- : int = 6
+utop # let add = fun x -> (fun y -> x + y);;
+val add : int -> int -> int = <fun>
+utop # add;;
+- : int -> int -> int = <fun>
+utop # add 1;;
+- : int -> int = <fun>
+utop # add 1 2;;
+- : int = 3

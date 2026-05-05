@@ -1,0 +1,129 @@
+# let x = 10;;
+val x : int = 10
+
+# let getx () = x;;
+val getx : unit -> int = <fun>
+
+# let x = 20;;
+val x : int = 20
+
+# getx ();;
+- : int = 10
+
+# x;;
+- : int = 20
+
+# let rec factorial n = if n = 1 then 1 else n * (factorial (n - 1));;
+val factorial : int -> int = <fun>
+
+# factorial 4;;
+- : int = 24
+
+# let add10 x =
+  let add x y = x + y in
+  add x 10;;
+val add10 : int -> int = <fun>
+
+# let rec sumlist l =
+  if l = [] then 0
+  else (List.hd l) + (sumlist (List.tl l));;
+val sumlist : int list -> int = <fun>
+
+# sumlist [1;2;3];;
+- : int = 6
+
+# 1 :: [2; 3];;
+- : int list = [1; 2; 3]
+
+# let rec sumlist l =
+  match l with
+      [] -> 0
+  | h :: t -> h + (sumlist t);;
+val sumlist : int list -> int = <fun>
+
+# sumlist [1;2;3];;
+- : int = 6
+
+# let rec sumlist l = 
+  match l with
+    [] -> 0
+  | h :: t -> h + (sumlist t);;
+val sumlist : int list -> int = <fun>
+
+# let rec sumlist l = 
+  match l with
+    [] -> 0
+  | h :: t -> h + (sumlist t)
+  | h1 :: h2 :: t -> h1 + h2 + (sumlist t);;
+Characters 82-95:
+Warning 11: this match case is unused.
+val sumlist : int list -> int = <fun>
+
+# let rec sumlist l = 
+  match l with
+  | h :: t -> h + (sumlist t);;
+Characters 23-65:
+Warning 8: this pattern-matching is not exhaustive.
+Here is an example of a case that is not matched:
+[]
+val sumlist : int list -> int = <fun>
+
+# type weekday = SU | MO | TU | WE | TH | FR | SA;;
+type weekday = SU | MO | TU | WE | TH | FR | SA
+
+# let string_of_weekday wd =
+  match wd with
+    SU -> "sunday"
+  | MO -> "monday"
+  | TU -> "tuesday"
+  | WE -> "wednesday"
+  | TH -> "thursday"
+  | FR -> "friday"
+  | SA -> "saturday";;
+val string_of_weekday : weekday -> string = <fun>
+
+# type date =
+  NUM of int * int * int
+| DESC of int * string * int;;
+type date = NUM of int * int * int | DESC of int * string * int
+
+# let d1 = NUM(3, 2, 2026);;
+val d1 : date = NUM (3, 2, 2026)
+
+# let d2 = (3, "February", 2026);;
+val d2 : int * string * int = (3, "February", 2026)
+
+# let d2 = DESC(3, "February", 2026);;
+val d2 : date = DESC (3, "February", 2026)
+
+# let string_of_date = function
+  NUM(d, m, y) -> "(" ^ (string_of_int d) ^ "," ^ (string_of_int m) ^ "," ^ (string_of_int y) ^ ")"
+  | DESC(d, m, y -> "(" ^ (string_of_int d) ^ "," ^ m ^ "," ^ (string_of_int y) ^ ")";;
+Error: Syntax error: ')' expected, the highlighted '(' might be unmatched
+
+# let string_of_date = function
+  NUM(d, m, y) -> "(" ^ (string_of_int d) ^ "," ^ (string_of_int m) ^ "," ^ (string_of_int y) ^ ")"
+  | DESC(d, m, y) -> "(" ^ (string_of_int d) ^ "," ^ m ^ "," ^ (string_of_int y) ^ ")";;
+val string_of_date : date -> string = <fun>
+
+# string_of_date d1;;
+- : string = "(3,2,2026)"
+
+# string_of_date d2;;
+- : string = "(3,February,2026)"
+
+# #use "mylist.ml";;
+type mylist = Empty | NonEmpty of int * mylist
+val sumlist : mylist -> int = <fun>
+val l1 : mylist = NonEmpty (1, NonEmpty (2, Empty))
+val main : unit -> unit = <fun>
+3- : unit = ()
+
+# ();;
+- : unit = ()
+
+# let l2 = NonEmpty(3, l1);;
+val l2 : mylist = NonEmpty (3, NonEmpty (1, NonEmpty (2, Empty)))
+
+# sumlist l2;;
+- : int = 6

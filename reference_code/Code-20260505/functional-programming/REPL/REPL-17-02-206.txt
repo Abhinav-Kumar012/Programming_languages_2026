@@ -1,0 +1,224 @@
+# type date = { day : int; month : int; year : int };;
+type date = { day : int; month : int; year : int; }
+
+# let d1 = { day = 17; month = 2; year = 2026 };;
+val d1 : date = {day = 17; month = 2; year = 2026}
+
+# let d2 = {d1 with day = 18};;
+val d2 : date = {day = 18; month = 2; year = 2026}
+
+# d2.day;;
+- : int = 18
+
+# let next_date d = { d with day = d.day + 1};;  
+val next_date : date -> date = <fun>
+
+# next_date d1;;
+- : date = {day = 18; month = 2; year = 2026}
+
+# let day_date d = d.day;;
+val day_date : date -> int = <fun>
+
+# day_date d1;;
+- : int = 17
+
+# type datetime = { day : int; time : int };;
+type datetime = { day : int; time : int; }
+
+# let day_date d = d.day;;
+val day_date : datetime -> int = <fun>
+
+# let day_date (d : date) = d.day;;
+val day_date : date -> int = <fun>
+
+# let rec length l =
+    match l with
+      [] -> 0
+    | _ :: t -> 1 + (length t);;
+val length : 'a list -> int = <fun>
+
+# let rec sl_length (l : string list) =
+    match l with
+      [] -> 0
+    | _ :: t -> 1 + (length t);;
+val sl_length : string list -> int = <fun>
+
+# sl_length [1; 2; 3; ];;
+Error: This expression has type int but an expression was expected of type
+         string
+
+# let rec sl_length (l : string list) : int =
+    match l with
+      [] -> 0
+    | _ :: t -> 1 + (length t);;
+val sl_length : string list -> int = <fun>
+
+# let rec sl_length (l : string list) : string =
+    match l with
+      [] -> 0
+    | _ :: t -> 1 + (length t);;
+Error: This expression has type int but an expression was expected of type
+         string
+
+# let x : int = 10;;
+val x : int = 10
+
+# let pair a b = (a, b);;
+val pair : 'a -> 'b -> 'a * 'b = <fun>
+
+# #use "m.ml";;
+module Calendar : sig type date = { day : int; month : int; year : int; } end
+
+# #use "m.ml";;
+module Calendar :
+  sig
+    type month =
+        JAN
+      | FEB
+      | MAR
+      | APR
+      | MAY
+      | JUN
+      | JUL
+      | AUG
+      | SEP
+      | OCT
+      | NOV
+      | DEC
+    type date = { day : int; mon : month; year : int; }
+  end
+
+# #use "m.ml";;
+module Calendar :
+  sig
+    type month =
+        JAN
+      | FEB
+      | MAR
+      | APR
+      | MAY
+      | JUN
+      | JUL
+      | AUG
+      | SEP
+      | OCT
+      | NOV
+      | DEC
+    type date = { day : int; mon : month; year : int; }
+    val next_date : date -> date
+  end
+
+# #use "m.ml";;
+module Calendar :
+  sig
+    type month =
+        JAN
+      | FEB
+      | MAR
+      | APR
+      | MAY
+      | JUN
+      | JUL
+      | AUG
+      | SEP
+      | OCT
+      | NOV
+      | DEC
+    type date = { day : int; mon : month; year : int; }
+    val next_date : date -> date
+  end
+val f : Calendar.date -> int = <fun>
+
+# #use "m.ml";;
+module Calendar :
+  sig
+    type month =
+        JAN
+      | FEB
+      | MAR
+      | APR
+      | MAY
+      | JUN
+      | JUL
+      | AUG
+      | SEP
+      | OCT
+      | NOV
+      | DEC
+    type date = { day : int; mon : month; year : int; }
+    val next_date : date -> date
+  end
+val f : Calendar.date -> int = <fun>
+
+# #use "m.ml";;
+module Calendar :
+  sig
+    type month =
+        JAN
+      | FEB
+      | MAR
+      | APR
+      | MAY
+      | JUN
+      | JUL
+      | AUG
+      | SEP
+      | OCT
+      | NOV
+      | DEC
+    type date = { day : int; mon : month; year : int; }
+    val next_date : date -> date
+  end
+File "m.ml", line 13, characters 30-33:
+Warning 40: day was selected from type Calendar.date.
+It is not visible in the current scope, and will not 
+be selected if the type becomes unknown.
+val f : Calendar.date -> int = <fun>
+
+# #use "m.ml";;
+module Calendar :
+  sig
+    type month =
+        JAN
+      | FEB
+      | MAR
+      | APR
+      | MAY
+      | JUN
+      | JUL
+      | AUG
+      | SEP
+      | OCT
+      | NOV
+      | DEC
+    type date = { day : int; mon : month; year : int; }
+    val is_leap_year : int -> bool
+    val last_day : month -> int -> int
+    val next_date : date -> date
+  end
+val f : Calendar.date -> int = <fun>
+
+# #use "m.ml";;
+module Calendar :
+  sig
+    type month =
+        JAN
+      | FEB
+      | MAR
+      | APR
+      | MAY
+      | JUN
+      | JUL
+      | AUG
+      | SEP
+      | OCT
+      | NOV
+      | DEC
+    type date = { day : int; mon : month; year : int; }
+    val is_leap_year : int -> bool
+    val last_day : month -> int -> int
+    val next_month : month -> month
+    val next_date : date -> date
+  end
+val f : Calendar.date -> int = <fun>
+

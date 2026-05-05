@@ -1,0 +1,21 @@
+utop # 1 = 3;;
+- : bool = false
+utop # 1 = 3;;
+- : bool = false
+utop # 1.0 = 3.0;;
+- : bool = false
+utop # 1.0 = 3;;
+Error: This expression has type int but an expression was expected of type
+         float
+utop # 1.0 =. 3.0;;
+Error: Unbound value =.
+utop # let x = 10;;
+val x : int = 10
+utop # let x = "IIITB";;
+val x : string = "IIITB"
+utop # x = "IIITB";;
+- : bool = true
+utop # let x = 10 in x + 45;;
+- : int = 55
+utop # let x = 10 in let y = x + 5 in let x = y * 2 in x + 5;;
+- : int = 35
